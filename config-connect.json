@@ -1,0 +1,17 @@
+//Deve ser fazer um POST para seguinte URL:
+//http://localhost:8083/connectors
+{
+  "name": "sqlserver-person-connector1",
+  "config": {
+    "connector.class": "io.debezium.connector.sqlserver.SqlServerConnector",
+    "database.hostname": "sqlserver",
+    "database.server.name": "sqlserver",
+    "database.port": "1433",
+    "database.user": "sa",
+    "database.password": "P@ssw0rd",
+    "database.dbname": "TesteEF",
+    "table.whitelist": "dbo.Person",
+    "database.history.kafka.bootstrap.servers": "kafka:29092",
+    "database.history.kafka.topic": "dbhistory.person"
+  }
+}

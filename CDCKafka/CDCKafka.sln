@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31410.357
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CDCKafka", "CDCKafka\CDCKafka.csproj", "{7330DB60-49BC-49CC-998D-8F002F714CCA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7330DB60-49BC-49CC-998D-8F002F714CCA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7330DB60-49BC-49CC-998D-8F002F714CCA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7330DB60-49BC-49CC-998D-8F002F714CCA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7330DB60-49BC-49CC-998D-8F002F714CCA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {56A2F0F0-3A3F-4C30-8964-06E12C898861}
+	EndGlobalSection
+EndGlobal

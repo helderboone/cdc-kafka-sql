@@ -1,0 +1,76 @@
+version: '3.4'
+services:
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    ports:
+      - 1433:1433
+    environment: 
+      MSSQL_AGENT_ENABLED: "true"
+      MSSQL_PID: Developer
+      SA_PASSWORD: P@ssw0rd
+      ACCEPT_EULA: "Y"
+    networks:
+      - cdc-kafka
+
+  zookeeper:
+    image: confluentinc/cp-zookeeper:latest
+    depends_on:
+      - sqlserver
+    ports:
+      - 2181:2181
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+    networks:
+      - cdc-kafka
+
+  kafka:
+    image: confluentinc/cp-kafka:latest
+    depends_on:
+      - sqlserver
+      - zookeeper
+    ports:
+      - 9092:9092
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092
+      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_LOG_CLEANER_DELETE_RETENTION_MS: 5000
+      KAFKA_MIN_INSYNC_REPLICAS: 1
+    networks:
+      - cdc-kafka
+
+  connector:
+    image: debezium/connect:1.2
+    depends_on:
+      - sqlserver
+      - zookeeper
+      - kafka
+    ports:
+      - 8083:8083
+    environment:      
+      GROUP_ID: 1
+      CONFIG_STORAGE_TOPIC: my_connect_configs
+      OFFSET_STORAGE_TOPIC: my_connect_offsets
+      STATUS_STORAGE_TOPIC: my_connect_statuses
+      BOOTSTRAP_SERVERS: kafka:9092
+    networks:
+      - cdc-kafka 
+  
+  kafdrop:
+    image: obsidiandynamics/kafdrop:latest
+    container_name: kafdrop
+    networks: 
+      - cdc-kafka
+    depends_on:
+      - kafka
+    ports:
+      - 9000:9000
+    environment:
+      KAFKA_BROKERCONNECT: kafka:9092
+
+networks:
+  cdc-kafka:
+    driver: bridge  
