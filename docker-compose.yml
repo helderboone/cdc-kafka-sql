@@ -1,7 +1,5 @@
 version: '3.7'
-
 services:
-
   sqlserver:
     image: cdc-sql-2019
     build: 
@@ -70,6 +68,15 @@ services:
       - 9000:9000
     environment:
       KAFKA_BROKERCONNECT: kafka:29092
+  
+  cdc-setup:
+    image: ubuntu:20.04   
+    command: RUN apt-get update && apt-get install -y iputils-ping    
+    volumes:
+      - ./scripts:/scripts
+    networks:
+      - broker-kafka
+    entrypoint: [ "/scripts/cdcsetup.sh" ]
 
 networks: 
   broker-kafka:

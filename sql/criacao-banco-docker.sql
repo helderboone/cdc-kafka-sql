@@ -29,4 +29,6 @@ EXEC sys.sp_cdc_enable_table
 GO
 
 insert into dbo.Person values ('Joao Silva', 'Rua Augusta, 100', '9999999999');
-update dbo.Person set Name = 'Antonio Pistos' where Id = 1
+insert into dbo.Person values ('Marcos Santos', 'Rua Jorgina, 90', '9999999992');
+insert into dbo.Person values ('Andre Marcos Souza', 'Rua Antonio Pinto, 8778', '9999999993');
+
