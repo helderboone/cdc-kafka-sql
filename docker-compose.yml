@@ -3,7 +3,10 @@ version: '3.7'
 services:
 
   sqlserver:
-    image: mcr.microsoft.com/mssql/server:2019-latest    
+    image: cdc-sql-2019
+    build: 
+        context: ./sql
+        dockerfile: ./Dockerfile
     ports:
       - 1433:1433
     environment: 
