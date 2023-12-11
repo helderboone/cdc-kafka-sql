@@ -11,14 +11,14 @@ namespace CDCKafka
         {
             var consumerConfig = new ConsumerConfig
             {
-                GroupId = $"sqlserver.dbo.Person.{Guid.NewGuid():N}.group.id",
+                GroupId = $"fullfillment.TesteEF.dbo.Person.{Guid.NewGuid():N}.group.id",
                 BootstrapServers = "localhost:9092",
                 AutoOffsetReset = AutoOffsetReset.Earliest,
             };
 
             using (var c = new ConsumerBuilder<string, string>(consumerConfig).Build())
             {
-                c.Subscribe("sqlserver.dbo.Person");
+                c.Subscribe("fullfillment.TesteEF.dbo.Person");
                 try
                 {
                     while (true)

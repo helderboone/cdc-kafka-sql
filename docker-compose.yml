@@ -71,9 +71,9 @@ services:
   
   cdc-setup:
     image: ubuntu:20.04   
-    command: RUN apt-get update && apt-get install -y iputils-ping    
+    command: RUN apt-get update && apt-get install -y iputils-ping
     volumes:
-      - ./scripts:/scripts
+      - ./scripts/:/scripts/
     networks:
       - broker-kafka
     entrypoint: [ "/scripts/cdcsetup.sh" ]

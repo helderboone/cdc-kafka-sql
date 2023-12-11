@@ -1,4 +1,5 @@
 FROM mcr.microsoft.com/mssql/server:2019-latest
+USER root
 RUN mkdir -p /usr/work
 WORKDIR /usr/work
 COPY . /usr/work/
