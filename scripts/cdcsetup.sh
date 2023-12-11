@@ -12,7 +12,7 @@ apt-get update && apt-get install -y iputils-ping && apt-get install curl -y
 
 #create connector
 echo "------------------------------ CREATING A CONNECTOR TO SQL ------------------------------"
-sleep 45
+sleep 15
 curl -H "Accept: application/json" -H "Content-type: application/json" -X POST -d '{
     "name": "sqlserver-person-connector1",
     "config": {
@@ -23,9 +23,14 @@ curl -H "Accept: application/json" -H "Content-type: application/json" -X POST -
     "database.user": "sa",
     "database.password": "P@ssw0rd",
     "database.dbname": "TesteEF",
+    "database.names": "TesteEF",
     "table.whitelist": "dbo.Person",
+    "topic.prefix": "fullfillment",
+    "database.encrypt":"false",
     "database.history.kafka.bootstrap.servers": "kafka:29092",
-    "database.history.kafka.topic": "dbhistory.person"
+    "schema.history.internal.kafka.bootstrap.servers": "kafka:29092",
+    "database.history.kafka.topic": "dbhistory.person",
+    "schema.history.internal.kafka.topic": "schemahistory.fullfillment"
   }
 }' http://connector:8083/connectors/
 echo "------------------------------ CONNECTOR SQL CREATED ------------------------------"
