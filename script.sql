@@ -25,3 +25,19 @@ EXEC sys.sp_cdc_enable_table
 @supports_net_changes = 1
 GO
 
+
+-- SQL util para ver os registros das modificacoes
+-- SELECT
+--     sys.fn_cdc_map_lsn_to_time(__$start_lsn) AS ChangeTime,
+--     CASE
+--         WHEN __$operation = 1 THEN 'Deleted'
+--         WHEN __$operation = 2 THEN 'Inserted'
+--         WHEN __$operation = 3 THEN 'Updated'
+--         WHEN __$operation = 4 THEN 'Previous Value for Update'
+--         ELSE 'Unknown'
+--     END AS OperationType,
+--     * 
+-- FROM
+--     cdc.dbo_Person_CT
+-- ORDER BY
+--     __$start_lsn;
